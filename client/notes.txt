@@ -1,0 +1,37 @@
+### It's easy to get discouraged when you're building something from scratch. 
+### Don't build for the applause, build for the impact. 
+
+-------------------------------------------------------------- steps to build the project: 
+# define the most basic redux slice 
+#  how to handle autorization and authentication in your application
+# the "children" special prop you have to pass from the parent to a child component in react. 
+# Basic structure of the Form.jsx 
+# based on the component type, we're decide what we need to render; input, select or whatever...
+
+#let's jump into back-end dev 
+#we need create models, controllers, moddlewares and routes 
+#we need setup our backend endpoint, setup our user model, setup the onSubmit method in react to call the API 
+# so for the models, we define what property we're gonna save on database
+
+
+
+
+
+-------------------------------------------------------------- about redux : 
+# propsDrilling + stateManagement ==> that's why redux is presented: 
+# separate the states in a store, instead of control that in our components. 
+# the component send the action to the store, for it updates the state. 
+# inside the store, there is a "reducer", wich is responsible for doing a comparison between the old state and the newest
+
+
+As the application grows & becomes complex, it is hard to reproduce issues and add new features if you have 
+no control over the state of your application.
+
+Redux reduces the complexity of the code, by enforcing the restriction on how and when state update can happen.
+
+
+
+
+
+
+
