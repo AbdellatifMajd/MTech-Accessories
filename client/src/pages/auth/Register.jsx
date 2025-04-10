@@ -5,6 +5,8 @@ import { register } from '@/store/authSlice'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
+
 
 function Register() {
   const initialState = {
@@ -14,6 +16,7 @@ function Register() {
     confirmPassword: ''
   }
 
+
   const [formData, setFormData] = useState(initialState)
   const dispatch = useDispatch() ;
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ function Register() {
     event.preventDefault();
     dispatch(register(formData)).then((data) => {
       if (data?.payload?.success) {
+        toast(data?.payload?.message, {action: {label: "Undo",onClick: () => console.log("Undo"),},})
         navigate("/auth/login");
       } else {
         console.log(data)
