@@ -1,0 +1,7 @@
+-- about cors : (is for security: it prevents unauthorized domain to get accss to the server)
+
+Imagine you have a bank website (mybank.com) and a hacker creates fakebank.com to steal data. 
+Without CORS, fakebank.com could send a request to mybank.com and try to access user data.
+CORS prevents this by blocking requests from unauthorized websites (fakebank.com).
+If you want to allow only your frontend (myapp.com) to talk to your backend (myapi.com), 
+you enable CORS like this. app.use(cors({origin: "http//localhost:3000"}))
