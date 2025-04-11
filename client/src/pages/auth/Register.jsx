@@ -16,7 +16,7 @@ function Register() {
     confirmPassword: ''
   }
 
-
+ 
   const [formData, setFormData] = useState(initialState)
   const dispatch = useDispatch() ;
   const navigate = useNavigate();
@@ -25,11 +25,12 @@ function Register() {
     event.preventDefault();
     dispatch(register(formData)).then((data) => {
       if (data?.payload?.success) {
-        toast(data?.payload?.message, {action: {label: "Undo",onClick: () => console.log("Undo"),},})
+        toast(data?.payload?.message, {style: {color: "green"}})
         navigate("/auth/login");
       } else {
-        console.log(data)
-      }
+        toast(data?.payload?.message, {style: {color: "red"}})
+
+              }
     });
   }
 
