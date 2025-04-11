@@ -11,14 +11,17 @@ const register = async (req, res) => {
 
         const existingUser = await User.findOne({email});
         if(existingUser){
-            return res.send("user already exists")
+            return res.json({
+                message: 'User already exist, please try again.',
+                success: false
+            })
         }
 
         const newUser = new User({fullName, email, password:hashPassword}); 
         await newUser.save();
 
         return res.status(201).json({
-            message: "user created successfully",
+            message: "User created successfully.",
             success: true
         })
     }
