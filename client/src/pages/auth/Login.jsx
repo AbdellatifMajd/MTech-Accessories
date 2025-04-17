@@ -1,7 +1,9 @@
 import CommonForm from '@/components/common/Form'
 import { loginFormControls } from '@/config'
+import { login } from '@/store/authSlice'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { data, Link } from 'react-router-dom'
 
 function Login() {
   const initialState = {
@@ -12,8 +14,10 @@ function Login() {
   }
 
   const [formData, setFormData] = useState(initialState)
+  const dispatch = useDispatch();
   function onSubmit(e) {
-    e.preventDefault()
+    e.preventDefault(); 
+    dispatch(login(formData)).then((data)=>{console.log(data)})
   }
 
   return (

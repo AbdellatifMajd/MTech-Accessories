@@ -29,7 +29,6 @@ function Register() {
         navigate("/auth/login");
       } else {
         toast(data?.payload?.message, {style: {color: "red"}})
-
               }
     });
   }
