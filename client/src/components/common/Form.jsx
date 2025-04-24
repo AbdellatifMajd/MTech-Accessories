@@ -49,6 +49,8 @@ function CommonForm({formControls, onSubmit, formData, setFormData, buttonText})
 
     return element; 
   }
+
+  
   return (
     <form onSubmit={onSubmit}>
       <div className='flex flex-col gap-3'>

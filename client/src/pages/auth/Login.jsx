@@ -3,7 +3,8 @@ import { loginFormControls } from '@/config'
 import { login } from '@/store/authSlice'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { data, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { toast } from 'sonner'
 
 function Login() {
   const initialState = {
@@ -17,7 +18,14 @@ function Login() {
   const dispatch = useDispatch();
   function onSubmit(e) {
     e.preventDefault(); 
-    dispatch(login(formData)).then((data)=>{console.log(data)})
+    dispatch(login(formData)).then((data)=>{
+      if(data?.payload?.success){
+        toast(data?.payload?.message, {style: {color:"green"}})
+      }
+      else{
+        toast(data?.payload?.message, {style:{color: "red"}})
+      }
+    })
   }
 
   return (

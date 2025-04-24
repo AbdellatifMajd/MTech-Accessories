@@ -1,35 +1,61 @@
-import React from 'react'
-import { useLocation, Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from "react-router-dom";
 
-function CheckAuth(props) {
-    const location = useLocation();
+function CheckAuth({ isAuthenticated, user, children }) {
+  const location = useLocation();
 
-    if (!props.isAuthenticated && !(location.pathname.includes("/login") || location.pathname.includes("/register"))) {
+  console.log(location.pathname, isAuthenticated);
+
+  if (location.pathname === "/") {
+    if (!isAuthenticated) {
       return <Navigate to="/auth/login" />;
-    }
-
-  if(props.isAuthenticated && (location.pathname.includes("/login") || location.pathname.includes("/register"))){
-    if(props.user?.role === "admin"){
-        return <Navigate to="/admin/dashboard" />
-    }
-    else{
-        return <Navigate to="/shop/home" />
+    } else {
+      if (user?.role === "admin") {
+        return <Navigate to="/admin/dashboard" />;
+      } else {
+        return <Navigate to="/shop/home" />;
+      }
     }
   }
 
-  if(props.isAuthenticated && location.pathname.includes("admin") &&props.user?.role !== "admin"){
-    return <Navigate to="/un-auth" />
+  if (
+    !isAuthenticated &&
+    !(
+      location.pathname.includes("/login") ||
+      location.pathname.includes("/register")
+    )
+  ) {
+    return <Navigate to="/auth/login" />;
   }
 
-  if(props.isAuthenticated && location.pathname.includes("admin") && props.user?.role === "admin"){
-    return <Navigate to="/admin/dashboard" />
+  if (
+    isAuthenticated &&
+    (location.pathname.includes("/login") ||
+      location.pathname.includes("/register"))
+  ) {
+    if (user?.role === "admin") {
+      return <Navigate to="/admin/dashboard" />;
+    } else {
+      return <Navigate to="/shop/home" />;
+    }
   }
 
-  
-  return props.children;
+  if (
+    isAuthenticated &&
+    user?.role !== "admin" &&
+    location.pathname.includes("admin")
+  ) {
+    return <Navigate to="/unauth-page" />;
+  }
 
+  if (
+    isAuthenticated &&
+    user?.role === "admin" &&
+    location.pathname.includes("shop")
+  ) {
+    return <Navigate to="/admin/dashboard" />;
+  }
 
-
+  return <>{children}</>;
 }
 
-export default CheckAuth
+export default CheckAuth;

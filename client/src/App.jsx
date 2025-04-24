@@ -14,10 +14,10 @@ import ShoppingLayout from './components/shopping/Layout'
 import ShoppingAccount from './pages/shopping/Account'
 import ShoppingHome from './pages/shopping/Home'
 import ShoppingListing from './pages/shopping/Listing'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const isAuthenticated = false; 
-  const user = null ;
+  const {user, isAuthenticated, isLoading} = useSelector((state) => state.auth);
   return (
     <Routes>
 

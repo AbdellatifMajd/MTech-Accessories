@@ -40,7 +40,6 @@ export const login = createAsyncThunk ("/auth/login", async (formData) => {
 
 
 
-//register slicing
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -48,16 +47,30 @@ const authSlice = createSlice({
       setUser: (state, action) => {},
     },
     extraReducers: (builder) => {
+
+//register manage states
       builder
         .addCase(register.pending, (state) => {state.isLoading = true; })
-        .addCase(register.fulfilled, (state, action) => {state.isLoading = false; state.user = null; state.isAuthenticated = false;})
-        .addCase(register.rejected, (state, action) => {state.isLoading = false; state.user = null; state.isAuthenticated = false;})
+        .addCase(register.fulfilled, (state, action) => {state.isLoading = false, state.isAuthenticated = true;})
+        .addCase(register.rejected, (state, action) => {state.isLoading = false, state.user = null, state.isAuthenticated = true;})
 
+//login manage states
 
+.addCase(login.pending, (state) => {
+  state.isLoading = true;
+})
+.addCase(login.fulfilled, (state, action) => {
+  console.log(action);
 
-        .addCase(login.pending, (state) => {state.isLoading= true})
-        .addCase(login.fulfilled, (state, action) => {state.isLoading= false, state.isAuthenticated= true, state.user= action.payload})
-        .addCase(login.rejected, (state) => {state.isLoading= false, state.isAuthenticated= false, state.user= null})
+  state.isLoading = false;
+  state.user = action.payload.success ? action.payload.user : null;
+  state.isAuthenticated = action.payload.success;
+})
+.addCase(login.rejected, (state, action) => {
+  state.isLoading = false;
+  state.user = null;
+  state.isAuthenticated = false;
+})
       
      }})
 
